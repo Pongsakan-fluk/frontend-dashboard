@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function TrafficSource() {
   const [data, setData] = useState([
@@ -55,38 +46,41 @@ function TrafficSource() {
       amt: 2100,
     },
   ]);
+
   return (
-    <div className="w-full bg-slate-200 flex flex-col justify-center px-10">
+    <div className="w-full bg-white flex flex-col justify-center rounded-lg px-10 drop-shadow-lg">
       <div className="my-2 flex justify-between items-center">
         <h3>Traffic sources</h3>
-        <button className="btn btn-warning">Action</button>
+        <button className="btn btn-warning text-white shadow-lg shadow-yellow-500/50">Action</button>
       </div>
       <hr className="bg-blue-500" />
 
-      <div className="mx-auto my-5">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-          barSize={20}
-        >
-          <XAxis
-            dataKey="name"
-            scale="point"
-            padding={{ left: 10, right: 10 }}
-          />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
-        </BarChart>
+      <div className="mx-auto my-5 w-full h-96">
+        <ResponsiveContainer>
+          <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+            barSize={20}
+          >
+            <XAxis
+              dataKey="name"
+              scale="point"
+              padding={{ left: 10, right: 10 }}
+            />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
