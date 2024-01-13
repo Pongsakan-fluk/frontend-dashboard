@@ -3,9 +3,9 @@ import React from "react";
 function SideBar() {
   return (
     <aside className="menu bg-base-200 w-56 h-screen sticky top-0 rounded-s-lg flex-col justify-between hidden md:flex shadow-xl">
-      <div className="">
+      <div>
         <div className="px-4 my-10">
-          <p className="text-2xl font-bold text-slate-500 cursor-pointer">LOGO</p>
+          <p className="text-2xl font-bold text-slate-500 cursor-pointer hover:text-primary">LOGO</p>
         </div>
         <ul className="">
           <li>
@@ -20,12 +20,12 @@ function SideBar() {
         </ul>
       </div>
 
-      <div className="p-5 space-y-2 border-2 border-t-slate-200">
+      <div className="p-5 space-y-2 border-t-2 border-slate-200">
         <div className="flex space-x-2 items-center">
           <div role="button" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
+            <div className="w-9 rounded-full">
               <img
-                alt="Tailwind CSS Navbar component"
+                alt="profile"
                 src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
               />
             </div>

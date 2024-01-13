@@ -11,8 +11,8 @@ function ProgressIncome() {
       <hr className="bg-blue-500" />
 
       <div
-        className="radial-progress text-primary mx-auto my-20 h-44 w-44"
-        style={{ "--value": 70 }}
+        className="radial-progress bg-slate-200 border-8 text-primary mx-auto my-20 h-44 w-44"
+        style={{ "--value": 70, "--size": "11rem", "--thickness": "1rem" }}
         role="progressbar"
       >
         70%
@@ -22,7 +22,7 @@ function ProgressIncome() {
         <span className="flex items-center space-x-2 text-warning font-bold">
           <p>32%</p>
           <progress
-            className="progress progress-warning w-full"
+            className="progress progress-warning "
             value="32"
             max="100"
           ></progress>
