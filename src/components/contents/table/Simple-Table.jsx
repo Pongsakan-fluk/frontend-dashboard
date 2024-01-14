@@ -107,6 +107,38 @@ function SimpleTable() {
               <FiTrash2 size={20} className="text-error mx-auto" />
             </td>
           </tr>
+          {/* row 6 */}
+          <tr>
+            <th>6</th>
+            <td>Brice Swyre</td>
+            <td>Tax Accountant</td>
+            <td>
+              <progress
+                className="progress progress-success"
+                value="92"
+                max="100"
+              ></progress>
+            </td>
+            <td>
+              <FiTrash2 size={20} className="text-error mx-auto" />
+            </td>
+          </tr>
+          {/* row 7 */}
+          <tr>
+            <th>7</th>
+            <td>Brice Swyre</td>
+            <td>Tax Accountant</td>
+            <td>
+              <progress
+                className="progress progress-success"
+                value="92"
+                max="100"
+              ></progress>
+            </td>
+            <td>
+              <FiTrash2 size={20} className="text-error mx-auto" />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
