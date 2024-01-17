@@ -1,9 +1,9 @@
 import React, { useState, useEffect, cloneElement } from "react";
 
 
-function Format1({ line, pg, title, icon, value, unit, vprogress }) {
+function CardValue({ line, pg, title, icon, value, unit, vprogress }) {
   return (
-  <div className={`w-full rounded-md flex justify-between p-4 bg-white border-b-4 ${line}`}>
+  <div className={`w-full rounded-md flex justify-between p-4 bg-white border-b-4 ${line} shadow-md`}>
       <div className="uppercase text-slate-400">
         <p>{title}</p>
         <span className="flex mt-5 items-center space-x-2">
@@ -24,4 +24,4 @@ function Format1({ line, pg, title, icon, value, unit, vprogress }) {
   );
 }
 
-export default Format1;
+export default CardValue;

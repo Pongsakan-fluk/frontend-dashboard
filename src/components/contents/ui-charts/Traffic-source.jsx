@@ -48,12 +48,12 @@ function TrafficSource() {
   ]);
 
   return (
-    <div className="w-full bg-white flex flex-col justify-center rounded-lg px-10 drop-shadow-lg">
-      <div className="my-2 flex justify-between items-center">
+    <div className="w-full bg-white flex flex-col justify-center rounded-lg px-0 md:px-10 drop-shadow-lg">
+      <div className="my-2 flex justify-between items-center px-10 md:px-0">
         <h3>Traffic sources</h3>
         <button className="btn btn-warning text-white shadow-lg shadow-yellow-500/50">Action</button>
       </div>
-      <hr className="bg-blue-500" />
+      <hr className="bg-slate-200" />
 
       <div className="mx-auto my-5 w-full h-96">
         <ResponsiveContainer>
