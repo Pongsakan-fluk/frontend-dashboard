@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
-function TrafficSource() {
-  const [data, setData] = useState([
+function SimpleLineChart() {
+  const data = [
     {
       name: "Page A",
       uv: 4000,
@@ -45,19 +54,21 @@ function TrafficSource() {
       pv: 4300,
       amt: 2100,
     },
-  ]);
+  ];
 
   return (
     <div className="w-full bg-white flex flex-col justify-center rounded-lg px-0 md:px-10 drop-shadow-lg">
       <div className="my-2 flex justify-between items-center px-10 md:px-0">
-        <p>Traffic sources</p>
-        <button className="btn btn-warning text-white shadow-lg shadow-yellow-500/50">Action</button>
+        <p>Line chart</p>
+        <button className="btn btn-warning text-white shadow-lg shadow-yellow-500/50">
+          Action
+        </button>
       </div>
       <hr className="bg-slate-200" />
 
       <div className="mx-auto my-5 w-full h-96">
         <ResponsiveContainer>
-          <BarChart
+          <LineChart
             width={500}
             height={300}
             data={data}
@@ -67,23 +78,29 @@ function TrafficSource() {
               left: 20,
               bottom: 5,
             }}
-            barSize={20}
           >
-            <XAxis
-              dataKey="name"
-              scale="point"
-              padding={{ left: 10, right: 10 }}
-            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
-          </BarChart>
+            <Line
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="uv"
+              stroke="#82ca9d"
+              strokeWidth={3}
+            />
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
 }
 
-export default TrafficSource;
+export default SimpleLineChart;

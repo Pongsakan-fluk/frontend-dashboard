@@ -32,7 +32,7 @@ function SideBar() {
             </div>
           </div>
 
-          <h4 className="text-lg">Profile</h4>
+          <h4>Profile</h4>
         </div>
 
         <div className="text-center">

@@ -9,13 +9,13 @@ function CardValue({ line, pg, title, icon, value, unit, vprogress }) {
         <span className="flex mt-5 items-center space-x-2">
           {/* <FiChevronUp size={30} className="text-success"/> */}
           {icon && cloneElement(icon)}
-          <h3 className="text-2xl font-bold text-black">{value} <span className="text-slate-400">{unit}</span></h3>
+          <h2 className="text-black">{value} <span className="text-slate-400">{unit}</span></h2>
         </span>
       </div>
 
       <div
         className={`radial-progress text-${pg}`}
-        style={{ "--value": `${vprogress}` }}
+        style={{ "--value": `${vprogress}`}}
         role="progressbar"
       >
         {vprogress}%

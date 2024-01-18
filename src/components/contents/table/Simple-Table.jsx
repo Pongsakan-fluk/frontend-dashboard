@@ -5,7 +5,7 @@ function SimpleTable() {
   return (
     <div className="overflow-x-auto bg-white border-t-4 border-indigo-500 rounded-lg drop-shadow-lg">
       <div className="my-5 flex justify-between items-center mx-5">
-        <h3>Table</h3>
+        <p>Table</p>
         <div className="join">
           <button className="join-item btn btn-xs">1</button>
           <button className="join-item btn btn-xs btn-active">2</button>

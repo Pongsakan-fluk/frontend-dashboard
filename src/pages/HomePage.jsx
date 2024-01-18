@@ -6,6 +6,7 @@ import CardValue from "../components/contents/ui-state/Card-Value";
 import TrafficSource from "../components/contents/ui-charts/Traffic-source";
 import ProgressIncome from "../components/contents/ui-charts/Progress-Income";
 import SimpleTable from "../components/contents/table/Simple-Table";
+import SimpleLineChart from "../components/contents/ui-charts/Simple-Line-Chart";
 
 
 function HomePage() {
@@ -54,6 +55,10 @@ function HomePage() {
         <TrafficSource />
 
         <ProgressIncome />
+      </div>
+
+      <div className="w-full mt-5">
+        <SimpleLineChart />
       </div>
 
       <div className="w-full mt-5">
