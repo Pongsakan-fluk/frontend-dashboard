@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Sector, Cell, Legend, ResponsiveContainer} from "recharts";
 
 function ProgressIncome() {
   const [data, setData] = useState([
@@ -53,6 +53,7 @@ function ProgressIncome() {
                 />
               ))}
             </Pie>
+            <Legend iconType="circle" />
           </PieChart>
         </ResponsiveContainer>
       </div>

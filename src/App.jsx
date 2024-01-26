@@ -17,7 +17,9 @@ function App() {
         <SideBar />
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} >
+            <Route path=":taxid" element={<HomePage />} />
+          </Route>
           <Route path="/manage-employee" element={<ManageEmployeePage />} />
           <Route path="/manage-product" element={<ManageProductPage />} />
         </Routes>
