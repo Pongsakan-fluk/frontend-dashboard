@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function TableFinancial({ handleClose }) {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
   let { taxid } = useParams();
 
   const fetchData = () => {
+    setLoading(true);
+
     axios
       .get(`https://piya-cloud.onrender.com/api/dbd/companyData/${taxid}`)
       .then((res) => {
         setData(res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
-
 
   useEffect(() => {
     fetchData();
@@ -33,26 +37,30 @@ function TableFinancial({ handleClose }) {
           ✕
         </button>
         <h2 className="text-slate-600">งบการเงิน</h2>
-        <div className="overflow-x-auto mt-5">
-          <table className="table table-xs table-zebra table-pin-rows text-center">
-            <thead>
-              <tr>
-                <th>ปี</th>
-                <th>ลูกหนี้การค้าสุทธิ</th>
-                <th>สินค้าคงเหลือ</th>
-                <th>สินทรัพย์หมุนเวียน</th>
-                <th>ที่ดินอาคารและอุปกรณ์</th>
-                <th>สินทรัพย์ไม่หมุนเวียน</th>
-                <th>สินทรัพย์รวม</th>
-                <th>หนี้สินหมุนเวียน</th>
-                <th>หนี้สินไม่หมุนเวียน</th>
-                <th>หนี้สินรวม</th>
-                <th>ส่วนของผู้ถือหุ้น</th>
-                <th>หนี้สิ้นรวมและส่วนของผู้ถือหุ้น</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
+
+        {loading ? (
+          <span className="loading loading-bars text-primary w-1/5 inset-x-1/3 inset-y-1/3 z-10"></span>
+        ) : (
+          <div className="overflow-x-auto mt-5">
+            <table className="table table-xs table-zebra table-pin-rows text-center">
+              <thead>
+                <tr>
+                  <th>ปี</th>
+                  <th>ลูกหนี้การค้าสุทธิ</th>
+                  <th>สินค้าคงเหลือ</th>
+                  <th>สินทรัพย์หมุนเวียน</th>
+                  <th>ที่ดินอาคารและอุปกรณ์</th>
+                  <th>สินทรัพย์ไม่หมุนเวียน</th>
+                  <th>สินทรัพย์รวม</th>
+                  <th>หนี้สินหมุนเวียน</th>
+                  <th>หนี้สินไม่หมุนเวียน</th>
+                  <th>หนี้สินรวม</th>
+                  <th>ส่วนของผู้ถือหุ้น</th>
+                  <th>หนี้สิ้นรวมและส่วนของผู้ถือหุ้น</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
                 data.financialPosition.map((item, idx) => (
                   <tr key={idx}>
                     <td>{item.year}</td>
@@ -69,9 +77,10 @@ function TableFinancial({ handleClose }) {
                     <td>{item.totalLiabilitiesEquity}</td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

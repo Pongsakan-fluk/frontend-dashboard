@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import TableDirectors from "../../modals/TableDirectors";
@@ -10,6 +10,7 @@ function SimpleTable() {
   const [data, setData] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [listPage, setListPage] = useState();
+  const [loading, setLoading] = useState(false);
 
   //for modal
   const [director, setDirector] = useState(false);
@@ -19,15 +20,19 @@ function SimpleTable() {
   const navigate = useNavigate();
 
   const fetchData = () => {
+    setLoading(true);
+
     axios
       .get(
         `https://piya-cloud.onrender.com/api/dbd/companyData/${activePage}/10`
       )
       .then((res) => {
         setData(res.data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -65,6 +70,22 @@ function SimpleTable() {
     setIncome(false);
   };
 
+  const nextPage = () => {
+    if (activePage == 189) {
+      setActivePage(parseInt(activePage))
+    } else {
+      setActivePage(parseInt(activePage) + 1)
+    }
+  }
+
+  const prevPage = () => {
+    if (activePage == 1) {
+      setActivePage(parseInt(activePage))
+    } else {
+      setActivePage(parseInt(activePage) - 1)
+    }
+  }
+
 
   useEffect(() => {
     fetchData();
@@ -72,13 +93,15 @@ function SimpleTable() {
   }, [activePage]);
 
   return (
-    <div className="overflow-x-auto max-h-screen bg-white border-t-4 border-indigo-500 rounded-lg drop-shadow-lg">
+    <div className="overflow-x-auto min-h-96 bg-white border-t-4 border-indigo-500 rounded-lg drop-shadow-lg">
+
+      {/* Head */}
       <div className="my-5 flex justify-between items-center mx-5">
         <p>Table</p>
         <div className="join">
           <button
             className="join-item btn btn-xs"
-            onClick={() => setActivePage(parseInt(activePage) - 1)}
+            onClick={prevPage}
           >
             «
           </button>
@@ -100,7 +123,7 @@ function SimpleTable() {
           </select>
           <button
             className="join-item btn btn-xs"
-            onClick={() => setActivePage(parseInt(activePage) + 1)}
+            onClick={nextPage}
           >
             »
           </button>
@@ -108,12 +131,13 @@ function SimpleTable() {
       </div>
       <hr />
 
+      {/* Table */}
       <table
         className={`table table-zebra table-xs`}
       >
         <thead className="text-center">
           <tr>
-            <th>เลขประจำตัวผู้เสียภาษี</th>
+            <th className="hidden sm:table-cell">เลขประจำตัวผู้เสียภาษี</th>
             <th>ชื่อกิจการ</th>
             <th className="hidden lg:table-cell">สถานะ</th>
             <th className="hidden lg:table-cell">วันที่จดทะเบียนจัดตั้ง</th>
@@ -128,7 +152,7 @@ function SimpleTable() {
           {data ? (
             data.map((item, idx) => (
               <tr key={item._id}>
-                <td>{item.taxid}</td>
+                <td className="hidden sm:table-cell">{item.taxid}</td>
                 <td>{item.companyName}</td>
                 <td className="hidden lg:table-cell">{item.companyStatus}</td>
                 <td className="hidden lg:table-cell">
@@ -174,6 +198,8 @@ function SimpleTable() {
       {director && <TableDirectors handleClose={handleClose} />}
       {financial && <TableFinancial handleClose={handleClose} />}
       {income && <TableIncome handleClose={handleClose} />}
+      {/* Loading */}
+      {loading && <span className="loading loading-bars text-primary w-1/4 absolute inset-y-1/3 inset-x-1/3 z-10"></span>}
     </div>
   );
 }

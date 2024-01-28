@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   h1 {
     @apply text-4xl font-bold;
@@ -21,4 +22,9 @@
   h6 {
     @apply text-[10.72px] font-bold;
   }
+}
+
+/* ไม่ล็อค scroll หน้าจอ เมื่อ open modal */
+:root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
+  overflow: scroll;
 }

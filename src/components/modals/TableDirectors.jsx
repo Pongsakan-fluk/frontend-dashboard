@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-
 
 function TableDirectors({ handleClose }) {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
   let { taxid } = useParams();
 
   const fetchData = () => {
+    setLoading(true);
+
     axios
       .get(`https://piya-cloud.onrender.com/api/dbd/companyData/${taxid}`)
       .then((res) => {
         setData(res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
-
 
   useEffect(() => {
     fetchData();
   }, [taxid]);
 
   return (
-    <div className="modal modal-open">
+    <div className="modal modal-open overflow-scroll">
       <div className="modal-box text-center text-black">
         <button
           onClick={handleClose}
@@ -34,25 +37,30 @@ function TableDirectors({ handleClose }) {
           ✕
         </button>
         <h2 className="text-slate-600">รายชื่อกรรมการ</h2>
-        <div className="overflow-x-auto mt-5">
-        <table className="table table-zebra table-pin-rows">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data.directors.map((item, idx) => (
-                <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td>{item.directorName}</td>
+
+        {loading ? (
+          <span className="loading loading-bars text-primary w-1/5 inset-x-1/3 inset-y-1/3 z-10"></span>
+        ) : (
+          <div className="overflow-x-auto mt-5">
+            <table className="table table-zebra table-pin-rows text-center">
+              <thead>
+                <tr>
+                  <th>ลำดับที่</th>
+                  <th>ชื่อ</th>
                 </tr>
-              ))}
-          </tbody>
-        </table>
-        </div>
+              </thead>
+              <tbody>
+                {data &&
+                  data.directors.map((item, idx) => (
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>{item.directorName}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
