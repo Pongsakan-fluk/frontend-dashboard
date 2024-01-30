@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment";
+
+//Components
 import TableDirectors from "../../modals/TableDirectors";
 import TableFinancial from "../../modals/TableFinancial";
 import TableIncome from "../../modals/TableIncome";
+
+//functions
+import { listCompanyData } from "../../../functions/companyData";
 
 function SimpleTable() {
   const [data, setData] = useState([]);
@@ -18,14 +22,12 @@ function SimpleTable() {
   const [income, setIncome] = useState(false);
 
   const navigate = useNavigate();
+  let location = useLocation();
 
   const fetchData = () => {
     setLoading(true);
 
-    axios
-      .get(
-        `https://piya-cloud.onrender.com/api/dbd/companyData/${activePage}/10`
-      )
+    listCompanyData(activePage)
       .then((res) => {
         setData(res.data.data);
         setLoading(false);
@@ -40,7 +42,7 @@ function SimpleTable() {
     setActivePage(e.target.value);
   };
 
-  const DropdownPage = () => {
+  const dropdownPage = () => {
     const result = [];
     for (let i = 1; i <= 189; i++) {
       result.push(i);
@@ -49,22 +51,22 @@ function SimpleTable() {
   };
 
   const handleModalDirector = (taxid) => {
-    navigate(`/${taxid}`);
+    navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
     setDirector(true);
   };
 
   const handleModalFinanc = (taxid) => {
-    navigate(`/${taxid}`);
+    navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
     setFinancial(true);
   };
 
   const handleModalIncome = (taxid) => {
-    navigate(`/${taxid}`);
+    navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
     setIncome(true);
   };
 
   const handleClose = () => {
-    navigate("/");
+    navigate(-1)
     setDirector(false);
     setFinancial(false);
     setIncome(false);
@@ -89,7 +91,7 @@ function SimpleTable() {
 
   useEffect(() => {
     fetchData();
-    DropdownPage();
+    dropdownPage();
   }, [activePage]);
 
   return (

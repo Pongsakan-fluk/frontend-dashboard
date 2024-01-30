@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
+//functions
+import { readCompanyData } from "../../functions/companyData";
+
 
 function TableIncome({ handleClose }) {
   const [data, setData] = useState();
@@ -11,8 +14,7 @@ function TableIncome({ handleClose }) {
   const fetchData = () => {
     setLoading(true);
 
-    axios
-      .get(`https://piya-cloud.onrender.com/api/dbd/companyData/${taxid}`)
+    readCompanyData(taxid)
       .then((res) => {
         setData(res.data);
         setLoading(false);

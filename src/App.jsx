@@ -17,11 +17,15 @@ function App() {
         <SideBar />
 
         <Routes>
-          <Route path="/" element={<HomePage />} >
+          <Route path="/" element={<HomePage />}>
             <Route path=":taxid" element={<HomePage />} />
           </Route>
-          <Route path="/manage-employee" element={<ManageEmployeePage />} />
-          <Route path="/manage-product" element={<ManageProductPage />} />
+          <Route path="/manage-employee" element={<ManageEmployeePage />}>
+            <Route path=":taxid" element={<ManageEmployeePage />} />
+          </Route>
+          <Route path="/manage-product" element={<ManageProductPage />}>
+            <Route path=":taxid" element={<ManageProductPage />} />
+          </Route>
         </Routes>
       </main>
     </>
