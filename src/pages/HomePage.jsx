@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { FiChevronUp, FiChevronDown, FiDollarSign, FiPlus } from "react-icons/fi";
-
-
+import {
+  FiChevronUp,
+  FiChevronDown,
+  FiDollarSign,
+  FiPlus,
+} from "react-icons/fi";
+//components
 import CardValue from "../components/contents/ui-state/Card-Value";
 import TrafficSource from "../components/contents/ui-charts/Traffic-source";
 import ProgressIncome from "../components/contents/ui-charts/Progress-Income";
 import SimpleTable from "../components/contents/table/Simple-Table";
 import SimpleLineChart from "../components/contents/ui-charts/Simple-Line-Chart";
-
+import AllModal from "../components/modals/AllModal";
 
 function HomePage() {
   return (
@@ -64,6 +68,9 @@ function HomePage() {
       <div className="w-full mt-5">
         <SimpleTable />
       </div>
+
+      {/* For modal */}
+      <AllModal />
     </div>
   );
 }

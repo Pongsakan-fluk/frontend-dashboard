@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { FiLayers } from "react-icons/fi";
 
 import SimpleTable from "../components/contents/table/Simple-Table";
+import AllModal from "../components/modals/AllModal";
 
 function ManageProductPage() {
+
   return (
     <div className="w-full min-h-screen bg-slat-100 py-10 px-2 md:px-10">
       <div className="w-fit mb-10 text-sm text-slate-500 space-y-2">
@@ -18,6 +20,9 @@ function ManageProductPage() {
       </div>
 
       <SimpleTable />
+
+      {/* Modal */}
+      <AllModal />
     </div>
   );
 }

@@ -25,6 +25,6 @@
 }
 
 /* ไม่ล็อค scroll หน้าจอ เมื่อ open modal */
-:root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
+/* :root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
   overflow: scroll;
-}
+} */

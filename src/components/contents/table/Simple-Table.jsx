@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment";
-
-//Components
-import TableDirectors from "../../modals/TableDirectors";
-import TableFinancial from "../../modals/TableFinancial";
-import TableIncome from "../../modals/TableIncome";
-
 //functions
 import { listCompanyData } from "../../../functions/companyData";
+//redux
+import { useSelector, useDispatch } from 'react-redux'
+import { openDirector, openFinancial, openIncome } from "../../../store/ModalSlice";
 
 function SimpleTable() {
   const [data, setData] = useState([]);
@@ -16,13 +13,9 @@ function SimpleTable() {
   const [listPage, setListPage] = useState();
   const [loading, setLoading] = useState(false);
 
-  //for modal
-  const [director, setDirector] = useState(false);
-  const [financial, setFinancial] = useState(false);
-  const [income, setIncome] = useState(false);
-
   const navigate = useNavigate();
   let location = useLocation();
+  const dispatch = useDispatch()
 
   const fetchData = () => {
     setLoading(true);
@@ -52,24 +45,17 @@ function SimpleTable() {
 
   const handleModalDirector = (taxid) => {
     navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
-    setDirector(true);
+    dispatch(openDirector())
   };
 
   const handleModalFinanc = (taxid) => {
     navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
-    setFinancial(true);
+    dispatch(openFinancial())
   };
 
   const handleModalIncome = (taxid) => {
     navigate(`${location.pathname == "/" ? `${location.pathname}${taxid}` : `${location.pathname}/${taxid}`}`);
-    setIncome(true);
-  };
-
-  const handleClose = () => {
-    navigate(-1)
-    setDirector(false);
-    setFinancial(false);
-    setIncome(false);
+    dispatch(openIncome())
   };
 
   const nextPage = () => {
@@ -196,10 +182,6 @@ function SimpleTable() {
         </tbody>
       </table>
 
-      {/* Modal */}
-      {director && <TableDirectors handleClose={handleClose} />}
-      {financial && <TableFinancial handleClose={handleClose} />}
-      {income && <TableIncome handleClose={handleClose} />}
       {/* Loading */}
       {loading && <span className="loading loading-bars text-primary w-1/4 absolute inset-y-1/3 inset-x-1/3 z-10"></span>}
     </div>

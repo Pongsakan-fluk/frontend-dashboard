@@ -30,10 +30,10 @@ function TableDirectors({ handleClose }) {
   }, [taxid]);
 
   return (
-    <div className="modal modal-open overflow-scroll">
-      <div className="modal-box text-center text-black">
+    <div className="modal modal-open" onClick={handleClose}>
+      <div className="modal-box w-full text-center text-black">
         <button
-          onClick={handleClose}
+          onClick={() => handleClose}
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
         >
           ✕

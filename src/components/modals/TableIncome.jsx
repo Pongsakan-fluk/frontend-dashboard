@@ -30,10 +30,10 @@ function TableIncome({ handleClose }) {
   }, [taxid]);
 
   return (
-    <div className="modal modal-open">
-      <div className="modal-box w-full max-w-6xl text-center text-black">
+    <div className="modal modal-open" onClick={handleClose}>
+      <div className="modal-box w-full max-w-fit text-center text-black">
         <button
-          onClick={handleClose}
+          onClick={() => handleClose}
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
         >
           ✕
