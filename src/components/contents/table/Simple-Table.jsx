@@ -10,6 +10,7 @@ import { openDirector, openFinancial, openIncome } from "../../../store/ModalSli
 function SimpleTable() {
   const [data, setData] = useState([]);
   const [activePage, setActivePage] = useState(1);
+  const [totalData, setTotalData] = useState()
   const [listPage, setListPage] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -22,6 +23,8 @@ function SimpleTable() {
 
     listCompanyData(activePage)
       .then((res) => {
+        setTotalData(res.data.page)
+        dropdownPage(res.data.page.totalPage)
         setData(res.data.data);
         setLoading(false);
       })
@@ -35,9 +38,9 @@ function SimpleTable() {
     setActivePage(e.target.value);
   };
 
-  const dropdownPage = () => {
+  const dropdownPage = (totalPage) => {
     const result = [];
-    for (let i = 1; i <= 189; i++) {
+    for (let i = 1; i <= totalPage; i++) {
       result.push(i);
     }
     setListPage(result);
@@ -59,7 +62,7 @@ function SimpleTable() {
   };
 
   const nextPage = () => {
-    if (activePage == 189) {
+    if (activePage == totalData.totalPage) {
       setActivePage(parseInt(activePage))
     } else {
       setActivePage(parseInt(activePage) + 1)
@@ -77,7 +80,6 @@ function SimpleTable() {
 
   useEffect(() => {
     fetchData();
-    dropdownPage();
   }, [activePage]);
 
   return (
